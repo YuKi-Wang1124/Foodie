@@ -16,10 +16,13 @@ class RestaurantTableViewController: UITableViewController {
     var restaurantTypes = ["Coffee & Tea Shop", "Cafe", "Tea House", "Austrian / Causual Drink", "French", "Bakery", "Bakery", "Chocolate", "Cafe", "American / Seafood", "American", "American", "Breakfast & Brunch", "Coffee & Tea", "Coffee & Tea", "Latin American", "Spanish", "Spanish", "Spanish", "British", "Thai"]
     
     var restaurantImages = ["cafedeadend", "homei", "teakha", "cafeloisl", "petiteoyster", "forkeerestaurant", "posatelier", "bourkestreetbakery", "haighschocolate", "palominoespresso", "upstate", "traif", "grahamavenuemeats", "wafflewolf", "fiveleaves", "cafelore", "confessional", "barrafina", "donostia", "royaloak", "caskpubkitchen"]
+    
+    var restaurantIsVisited = Array(repeating: false, count: 21)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
 
     // MARK: - Table view data source
@@ -41,7 +44,42 @@ class RestaurantTableViewController: UITableViewController {
         // 設定 cell
         cell.thumbnailImageView.image = UIImage(named: restaurantImages[indexPath.row])
         cell.nameLabel.text = restaurantNames[indexPath.row]
+        cell.locationLabel.text = restaurantLocations[indexPath.row]
+        cell.typeLabel.text = restaurantTypes[indexPath.row]
+        // 打卡
+        cell.heartImageView.isHidden = !self.restaurantIsVisited[indexPath.row]
         return cell
+    }
+    
+    // 向左滑動表格
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+            // 從資料來源刪除列
+            self.restaurantNames.remove(at: indexPath.row)
+            self.restaurantLocations.remove(at: indexPath.row)
+            self.restaurantTypes.remove(at: indexPath.row)
+            self.restaurantIsVisited.remove(at: indexPath.row)
+            self.restaurantImages.remove(at: indexPath.row)
+            
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // 呼叫完成處理器來取消動作按鈕
+            completionHandler(true)
+        }
+        
+        let shareAction = UIContextualAction(style: .normal, title: "Share") {
+            (action, sourceView, completionHandler) in
+            let defaultText = "Just checking in at" + self.restaurantNames[indexPath.row]
+            let activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            
+            self.present(activityController, animated: true, completion: nil)
+            completionHandler(true)
+        
+        }
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+        
+        return swipeConfiguration
     }
     
 
@@ -50,12 +88,47 @@ class RestaurantTableViewController: UITableViewController {
         // 建立一個選單作為動作清單
         let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
         
+        // ipad 彈出 alert
+        if let popoverContrller = optionMenu.popoverPresentationController {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                // 利用 sourceView 讓它指到某個特定的 view
+                popoverContrller.sourceView = cell
+                // 箭頭指到的位置
+                popoverContrller.sourceRect = cell.bounds
+            }
+        }
+        
         // 加入動作至選單中
         let optionAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         optionMenu.addAction(optionAction)
         
         // 呈現選單
         present(optionMenu, animated: true, completion: nil)
+        
+        // 加入打電話動作
+        let callActionHandler = {(action: UIAlertAction!) -> Void in
+            let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .alert)
+            alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertMessage, animated: true, completion: nil)
+        }
+        
+        let callAction = UIAlertAction(title: "Call" + "123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
+        optionMenu.addAction(callAction)
+        
+        // 打卡動作
+        let checkInTitle = self.restaurantIsVisited[indexPath.row] ? "Undo Check in" : "Check in"
+        let checkInAction = UIAlertAction(title: checkInTitle, style: .default, handler: {
+            (action: UIAlertAction!) -> Void in
+            let cell = tableView.cellForRow(at: indexPath) as? RestaurantTableViewCell
+            
+            // 一開始是 false
+            cell?.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row]
+            self.restaurantIsVisited[indexPath.row] = self.restaurantIsVisited[indexPath.row] ? false : true
+            
+        })
+        optionMenu.addAction(checkInAction)
     }
  
+    
+    
 }

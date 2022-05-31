@@ -27,7 +27,7 @@
                                             <rect key="frame" x="26" y="11" width="368" height="60"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xOK-On-WxF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="176" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="368" height="60"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zOf-6H-62D">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -36,8 +36,8 @@
                                                                 <constraint firstAttribute="height" constant="60" id="bca-ae-IpY"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="0Ff-cb-Ntm">
-                                                            <rect key="frame" x="75" y="0.0" width="101" height="48"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="0Ff-cb-Ntm">
+                                                            <rect key="frame" x="75" y="0.0" width="256" height="48"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToT-ks-sbu">
                                                                     <rect key="frame" x="0.0" y="0.0" width="39.5" height="17"/>
@@ -59,12 +59,12 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart-tick" id="gxH-UM-kvI">
+                                                            <rect key="frame" x="346" y="0.0" width="22" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                     </subviews>
                                                 </stackView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart-tick" id="gxH-UM-kvI">
-                                                    <rect key="frame" x="346" y="0.0" width="22" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                             </subviews>
                                         </stackView>
                                     </subviews>
