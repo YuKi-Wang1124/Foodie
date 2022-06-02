@@ -15,6 +15,7 @@
 		CC7096372845CBA200C696D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC7096352845CBA200C696D7 /* LaunchScreen.storyboard */; };
 		CC70963F2845DF1E00C696D7 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC70963E2845DF1E00C696D7 /* RestaurantTableViewCell.swift */; };
 		CC7096412845E0E800C696D7 /* RestaurantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7096402845E0E800C696D7 /* RestaurantTableViewController.swift */; };
+		CC709643284894CC00C696D7 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC709642284894CC00C696D7 /* RestaurantDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CC7096382845CBA200C696D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC70963E2845DF1E00C696D7 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		CC7096402845E0E800C696D7 /* RestaurantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewController.swift; sourceTree = "<group>"; };
+		CC709642284894CC00C696D7 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +66,12 @@
 				CC70962C2845CB9E00C696D7 /* SceneDelegate.swift */,
 				CC70962E2845CB9E00C696D7 /* ViewController.swift */,
 				CC7096302845CB9E00C696D7 /* Main.storyboard */,
-				CC70963E2845DF1E00C696D7 /* RestaurantTableViewCell.swift */,
-				CC7096402845E0E800C696D7 /* RestaurantTableViewController.swift */,
 				CC7096332845CBA200C696D7 /* Assets.xcassets */,
 				CC7096352845CBA200C696D7 /* LaunchScreen.storyboard */,
 				CC7096382845CBA200C696D7 /* Info.plist */,
+				CC7096402845E0E800C696D7 /* RestaurantTableViewController.swift */,
+				CC70963E2845DF1E00C696D7 /* RestaurantTableViewCell.swift */,
+				CC709642284894CC00C696D7 /* RestaurantDetailViewController.swift */,
 			);
 			path = Foodie;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				CC70962F2845CB9E00C696D7 /* ViewController.swift in Sources */,
 				CC7096412845E0E800C696D7 /* RestaurantTableViewController.swift in Sources */,
 				CC70962B2845CB9E00C696D7 /* AppDelegate.swift in Sources */,
+				CC709643284894CC00C696D7 /* RestaurantDetailViewController.swift in Sources */,
 				CC70962D2845CB9E00C696D7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
