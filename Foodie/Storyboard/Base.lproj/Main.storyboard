@@ -90,7 +90,9 @@
                             <outlet property="delegate" destination="EqW-ux-z4C" id="inG-xg-eej"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Foodie" id="z58-Ox-6Bk"/>
+                    <navigationItem key="navigationItem" title="Foodie" id="z58-Ox-6Bk">
+                        <barButtonItem key="backBarButtonItem" title=" " id="m53-lv-Ptn"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhk-YY-ejg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -116,8 +118,8 @@
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lki-WR-pKL" userLabel="Name Label">
-                                    <rect key="frame" x="14" y="271" width="85" height="42"/>
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="35"/>
+                                    <rect key="frame" x="14" y="271" width="82.5" height="42"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -254,6 +256,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jYs-tq-zvk">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="EqW-ux-z4C" kind="relationship" relationship="rootViewController" id="w66-Wd-0BR"/>
                     </connections>

@@ -15,27 +15,47 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     
     var restaurant = Restaurant()
 
-    // MARK: - View controller life cycle
+    // MARK: - View controller life cycle 視圖控制器生命週期
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationItem.largeTitleDisplayMode = .never
         
-        // Configure header view
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = .white
+        
+        // 使導覽列不下移
+        tableView.contentInsetAdjustmentBehavior = .never
+        
+        // 設定頭視圖
         headerView.nameLabel.text = restaurant.name
         headerView.typeLabel.text = restaurant.type
         headerView.headerImageView.image = UIImage(named: restaurant.image)
         headerView.heartImageView.isHidden = (restaurant.isVisited) ? false : true
         
-        // Configure the table view
+        // 建立表格視圖間的連結
         tableView.delegate = self
         tableView.dataSource = self
+        
+        // 移除表格分隔符號
         tableView.separatorStyle = .none
     }
     
-    // MARK: - Table view data source
+    // 當一個視圖準備要顯示時，viewWillAppear 會被呼叫
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 把目前 navigationBar 改為深色模式
+        self.navigationController?.navigationBar.barStyle = .black
+        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+  
     
+    // MARK: - Table view data source 表格視圖資料源
+    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -43,7 +63,8 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-
+    
+    // 3 Row , 設定表格內容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {

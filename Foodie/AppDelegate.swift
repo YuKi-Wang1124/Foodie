@@ -9,11 +9,18 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+     
+        // 自訂導覽控制器返回按鈕的圖片
+        let backButtonImage = UIImage(systemName: "arrow.backward")
+        UINavigationBar.appearance().backIndicatorImage = backButtonImage
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+        
+
+        
+        //windowScene?.statusBarManager?.statusBarStyle = .lightContent
+        
         return true
     }
 

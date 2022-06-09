@@ -12,6 +12,7 @@ class RestaurantDetailIconTextCell: UITableViewCell {
     @IBOutlet var iconImageView: UIImageView!
     @IBOutlet var shortTextLabel: UILabel! {
         didSet {
+            // 多行
             shortTextLabel.numberOfLines = 0
         }
     }

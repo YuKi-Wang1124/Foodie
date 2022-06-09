@@ -11,6 +11,7 @@ class RestaurantDetailTextCell: UITableViewCell {
     
     @IBOutlet var descriptionLabel: UILabel! {
         didSet {
+            // 多行
             descriptionLabel.numberOfLines = 0
         }
     }
