@@ -43,6 +43,8 @@
 		CC709643284894CC00C696D7 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC709642284894CC00C696D7 /* RestaurantDetailViewController.swift */; };
 		CC7096452848BFB100C696D7 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7096442848BFB100C696D7 /* Restaurant.swift */; };
 		CC716C54286D985B003D39D5 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC716C53286D985B003D39D5 /* ReviewViewController.swift */; };
+		CC716C562877BD49003D39D5 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC716C552877BD49003D39D5 /* RoundedTextField.swift */; };
+		CC716C582877F781003D39D5 /* NewRestaurantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC716C572877F781003D39D5 /* NewRestaurantController.swift */; };
 		CCBEFDF72858881C00E87482 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEFDF62858881C00E87482 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +87,8 @@
 		CC709642284894CC00C696D7 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		CC7096442848BFB100C696D7 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		CC716C53286D985B003D39D5 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		CC716C552877BD49003D39D5 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
+		CC716C572877F781003D39D5 /* NewRestaurantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRestaurantController.swift; sourceTree = "<group>"; };
 		CCBEFDF62858881C00E87482 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +212,7 @@
 				CC709642284894CC00C696D7 /* RestaurantDetailViewController.swift */,
 				CCBEFDF62858881C00E87482 /* MapViewController.swift */,
 				CC716C53286D985B003D39D5 /* ReviewViewController.swift */,
+				CC716C572877F781003D39D5 /* NewRestaurantController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				CC70963E2845DF1E00C696D7 /* RestaurantTableViewCell.swift */,
+				CC716C552877BD49003D39D5 /* RoundedTextField.swift */,
 				CC670A5628506F2F000F0E21 /* RestaurantDetailHeaderView.swift */,
 				CC670A58285091CA000F0E21 /* RestaurantDetailIconTextCell.swift */,
 				CC670A5A28509454000F0E21 /* RestaurantDetailTextCell.swift */,
@@ -340,6 +346,7 @@
 			files = (
 				CC670A8728524DB8000F0E21 /* UINavigationController+Ext.swift in Sources */,
 				CC70963F2845DF1E00C696D7 /* RestaurantTableViewCell.swift in Sources */,
+				CC716C582877F781003D39D5 /* NewRestaurantController.swift in Sources */,
 				CC716C54286D985B003D39D5 /* ReviewViewController.swift in Sources */,
 				CC670A5B28509454000F0E21 /* RestaurantDetailTextCell.swift in Sources */,
 				CC7096412845E0E800C696D7 /* RestaurantTableViewController.swift in Sources */,
@@ -349,6 +356,7 @@
 				CC277FC92853495D007C3352 /* RestaurantDetailSeparatorCell.swift in Sources */,
 				CC277FCB28534ED4007C3352 /* RestaurantDetailMapCell.swift in Sources */,
 				CC709643284894CC00C696D7 /* RestaurantDetailViewController.swift in Sources */,
+				CC716C562877BD49003D39D5 /* RoundedTextField.swift in Sources */,
 				CC670A85285200D9000F0E21 /* UIColor+Ext.swift in Sources */,
 				CC70962D2845CB9E00C696D7 /* SceneDelegate.swift in Sources */,
 				CC670A59285091CA000F0E21 /* RestaurantDetailIconTextCell.swift in Sources */,
@@ -502,6 +510,8 @@
 				DEVELOPMENT_TEAM = VP4GBKDNYR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Foodie/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "You need to grant the app access to your camera in order to  take photos.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "You need to grant the app access to your photo library so you can pick your favorite restaurant photo.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -530,6 +540,8 @@
 				DEVELOPMENT_TEAM = VP4GBKDNYR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Foodie/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "You need to grant the app access to your camera in order to  take photos.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "You need to grant the app access to your photo library so you can pick your favorite restaurant photo.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -191,52 +191,10 @@ class RestaurantTableViewController: UITableViewController {
     }
     
     
+    @IBAction func unwindToHome(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
 
-//    // 選擇表格
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        // 建立一個選單作為動作清單
-//        let optionMenu = UIAlertController(title: nil, message: "What do you want to do?", preferredStyle: .actionSheet)
-//
-//        // ipad 彈出 alert
-//        if let popoverContrller = optionMenu.popoverPresentationController {
-//            if let cell = tableView.cellForRow(at: indexPath) {
-//                // 利用 sourceView 讓它指到某個特定的 view
-//                popoverContrller.sourceView = cell
-//                // 箭頭指到的位置
-//                popoverContrller.sourceRect = cell.bounds
-//            }
-//        }
-//
-//        // 加入動作至選單中
-//        let optionAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        optionMenu.addAction(optionAction)
-//
-//        // 呈現選單
-//        present(optionMenu, animated: true, completion: nil)
-//
-//        // 加入打電話動作
-//        let callActionHandler = {(action: UIAlertAction!) -> Void in
-//            let alertMessage = UIAlertController(title: "Service Unavailable", message: "Sorry, the call feature is not available yet. Please retry later.", preferredStyle: .alert)
-//            alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            self.present(alertMessage, animated: true, completion: nil)
-//        }
-//
-//        let callAction = UIAlertAction(title: "Call" + "123-000-\(indexPath.row)", style: .default, handler: callActionHandler)
-//        optionMenu.addAction(callAction)
-//
-//        // 打卡動作
-//        let checkInTitle = self.restaurantIsVisited[indexPath.row] ? "Undo Check in" : "Check in"
-//        let checkInAction = UIAlertAction(title: checkInTitle, style: .default, handler: {
-//            (action: UIAlertAction!) -> Void in
-//            let cell = tableView.cellForRow(at: indexPath) as? RestaurantTableViewCell
-//
-//            // 一開始是 false
-//            cell?.heartImageView.isHidden = self.restaurantIsVisited[indexPath.row]
-//            self.restaurantIsVisited[indexPath.row] = self.restaurantIsVisited[indexPath.row] ? false : true
-//
-//        })
-//        optionMenu.addAction(checkInAction)
-//    }
 
     
 }
