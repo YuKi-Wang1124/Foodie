@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -49,6 +50,7 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
         }
     }
     
+    var restaurant: RestaurantMO!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,8 +102,11 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
                 }
             })
             
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
             photoSourceRequestController.addAction(cameraAction)
             photoSourceRequestController.addAction(photoLibraryAction)
+            photoSourceRequestController.addAction(cancelAction)
             
             // 針對 iPad
             if let popoverController = photoSourceRequestController.popoverPresentationController {
@@ -149,10 +154,37 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate, UIIma
             blankAlert.addAction(blankAlertAction)
             
             present(blankAlert, animated: true, completion: nil)
+            
+            return
         }
         
+        // 取得 appDelegate 的參照
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            restaurant = RestaurantMO(context: appDelegate.persistentContainer.viewContext)
+            restaurant.name = nameTextField.text
+            restaurant.type = typeTextField.text
+            restaurant.location = addressTextField.text
+            restaurant.phone = phoneTextField.text
+            restaurant.summary = descriptionTextView.text
+            restaurant.isVisited = false
+            
+            if let restaurantImage = photoImageView.image {
+                restaurant.image = restaurantImage.pngData()
+            }
+            
+            print("Saving data to context ...")
+            appDelegate.saveContext()
+        }
         
+        print("Name: \(nameTextField.text!)")
+        print("Type: \(typeTextField.text!)")
+        print("Location: \(addressTextField.text!)")
+        print("Phone: \(phoneTextField.text!)")
+        print("Description: \(descriptionTextView.text!)")
         
+       
+        
+        dismiss(animated: true, completion: nil)
     }
    
  

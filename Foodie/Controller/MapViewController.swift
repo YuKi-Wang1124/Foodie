@@ -12,7 +12,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet var mapView: MKMapView!
     
-    var restaurant = Restaurant()
+    var restaurant: RestaurantMO!
     
     let locationManager = CLLocationManager()
     
@@ -21,7 +21,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // mapView 的委派
         mapView.delegate = self
-        
         mapView.showsCompass = true
         mapView.showsScale = true
         mapView.showsTraffic = true
@@ -29,7 +28,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         // 地址轉換為座標後並標記在地圖上
         let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(restaurant.location, completionHandler: { [self] placemarks, error in
+        geoCoder.geocodeAddressString(restaurant.location ?? "", completionHandler: {  placemarks, error in
             if let error = error {
                 print(error)
                 return
