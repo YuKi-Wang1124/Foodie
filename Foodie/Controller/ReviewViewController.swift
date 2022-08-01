@@ -24,7 +24,6 @@ class ReviewViewController: UIViewController {
         }
         
         
-        
         // 應用模糊效果
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -43,8 +42,6 @@ class ReviewViewController: UIViewController {
             rateButton.transform = moveScaleTransform
             rateButton.alpha = 0
          }
-        
-        
         
     }
         

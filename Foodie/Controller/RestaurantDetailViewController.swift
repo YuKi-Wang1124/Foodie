@@ -38,6 +38,7 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
             headerView.headerImageView.image = UIImage(data: restaurantImage as Data)
         }
         
+        // 第一次載入時顯示餐廳評價
         if let rating = restaurant.rating {
             headerView.ratingImageView.image = UIImage(named: rating)
         }
@@ -140,10 +141,12 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
     
     @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: {
+            
             if let rating = segue.identifier {
                 self.restaurant.rating = rating
                 self.headerView.ratingImageView.image = UIImage(named: rating)
                 
+                // 將變更儲存在資料庫
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                     appDelegate.saveContext()
                 }

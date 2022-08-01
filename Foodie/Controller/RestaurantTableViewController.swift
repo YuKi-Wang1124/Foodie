@@ -8,16 +8,30 @@
 import UIKit
 import CoreData
 
-class RestaurantTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class RestaurantTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     
     @IBOutlet var  emptyRestaurantView: UIView!
     
     var  restaurants: [RestaurantMO] = []
     var fetchResultController: NSFetchedResultsController<RestaurantMO>!
-
+    var searchController: UISearchController!
+    var searchResults: [RestaurantMO] = []
+    
     // MARK: - 視圖控制器生命週期
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 加上搜尋列
+        searchController = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        // 設定搜尋列樣式
+        searchController.searchBar.placeholder = "Search restaurant..."
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.tintColor = UIColor(red: 231, green: 76, blue: 60)
         
         // 準備空視圖
         tableView.backgroundView = emptyRestaurantView
@@ -60,6 +74,25 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         
     }
     
+    // 建立過濾的方法
+    func filterContent(for searchText: String) {
+        searchResults = restaurants.filter({ (restaurant) -> Bool in
+            if let name = restaurant.name, let location = restaurant.location {
+                let isMatch = name.localizedCaseInsensitiveContains(searchText) || location.localizedCaseInsensitiveContains(searchText)
+                return isMatch
+            }
+            
+            return false
+        })
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContent(for: searchText)
+            tableView.reloadData()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // 處理可以重建的任何資源
@@ -70,6 +103,21 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barStyle = .default
         navigationController?.hidesBarsOnSwipe = true
+    }
+    
+    // viewDidAppear 方法會自動由 iOS 呼叫
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // 從 UserDefaults 取得 hasViewedWalkthrough 鍵並檢查這個值
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return
+        }
+        
+        // 實例化控制器，false 才顯示
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+            present(walkthroughViewController, animated: true, completion:  nil)
+        }
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -121,8 +169,11 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
-        return restaurants.count
+        if searchController.isActive {
+            return searchResults.count
+        } else {
+            return restaurants.count
+        }
     }
    
     // 設定表格內容
@@ -130,16 +181,28 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         let cellIdentifier = "datacell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RestaurantTableViewCell
         
+        // 判斷是從搜尋結果或是原來的陣列來取得餐廳
+        let restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
+        
         // 設定 cell
-        if let restaurantImage = restaurants[indexPath.row].image {
+       
+        cell.nameLabel.text = restaurant.name
+        if let restaurantImage = restaurant.image {
             cell.thumbnailImageView.image = UIImage(data: restaurantImage as Data)
         }
-        cell.nameLabel.text = restaurants[indexPath.row].name
-        cell.locationLabel.text = restaurants[indexPath.row].location
-        cell.typeLabel.text = restaurants[indexPath.row].type
+        cell.locationLabel.text = restaurant.location
+        cell.typeLabel.text = restaurant.type
         // 打卡
-        cell.heartImageView.isHidden = !self.restaurants[indexPath.row].isVisited
+        cell.heartImageView.isHidden = restaurant.isVisited ? false : true
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if searchController.isActive {
+            return false
+        } else {
+            return true
+        }
     }
     
     // MARK: - 向右滑動表格
@@ -175,7 +238,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
     }
     
     
-    // MARK: - 向左滑動表格
+    // ㄈ            Ｚ
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         // （向左滑）刪除按鈕
@@ -238,7 +301,7 @@ class RestaurantTableViewController: UITableViewController, NSFetchedResultsCont
         if segue.identifier == "showRestaurantDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! RestaurantDetailViewController
-                destinationController.restaurant = restaurants[indexPath.row]
+                destinationController.restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
             }
         }
     }
