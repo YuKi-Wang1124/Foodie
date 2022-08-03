@@ -7,7 +7,9 @@
 
 import UIKit
 
-protocol WalkthroughPageViewControllerDelegate: class {
+
+protocol WalkthroughPageViewControllerDelegate: AnyObject {
+    // 告訴它的委派目前的頁面所引，這個委派可以更新頁面指示器
     func didUpdatePageIndex(currentIndex: Int)
 }
 
@@ -37,12 +39,16 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
         }
     }
     
+    // 如果採用 UIPageViewControllerDelegate 協定，這個方法會在手勢所驅動的轉場完成後自動被呼叫
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
+        // 檢查轉場是否完成
         if completed {
             if let contentViewController = pageViewController.viewControllers?.first as? WalkthroughContentViewController {
                 
+                // 找出目前頁面的索引值
                 currentIndex = contentViewController.index
+                // 呼叫 didUpdatePageIndex 來通知這個委派
                 walkthroughDelegate?.didUpdatePageIndex(currentIndex: contentViewController.index)
             }
         }
@@ -52,6 +58,8 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
     func forwardPage() {
         currentIndex += 1
         if let nextViewController  = contentViewController(at: currentIndex) {
+            
+            // 呼叫內建的 setViewControllers 方法，並導覽至下一個視圖控制器
             setViewControllers([nextViewController], direction: .forward, animated: true, completion: nil)
         }
     }
@@ -64,7 +72,7 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
         // 建立新的視圖控制器並傳遞適合的資料
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if let pageContentViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughContentViewController") as? WalkthroughContentViewController {
-            
+            // 依照頁面顯示不同內容
             pageContentViewController.imageFile = pageImages[index]
             pageContentViewController.heading = pageHeadings[index]
             pageContentViewController.subHeading = pageSubHeadings[index]
@@ -76,11 +84,12 @@ class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerD
         return nil
     }
     
-    
+    // UIPageViewControllerDataSourceu 的 protocol 需要的兩個方法
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        // 取得既定視圖控制器的目前頁面索引值
         var index = (viewController as! WalkthroughContentViewController).index
         index -= 1
-        
+        // 回傳給視圖控制器來顯示
         return contentViewController(at: index)
     }
     
